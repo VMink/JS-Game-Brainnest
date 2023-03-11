@@ -7,14 +7,19 @@ let computerPlay =  () =>  gameMoves[Math.floor((Math.random()*gameMoves.length)
 let playerSelection = function() {
     let playerMoveInput = '';
     while (true) {
-        playerMoveInput = prompt("Enter your move: ");
+        playerMoveInput = prompt("Enter your move (rock, paper, scissors): ");
         if (playerMoveInput === null) {
-            let endGame = prompt("Are you sure you want to exit? (Y/N)");
-            if (endGame == null || endGame == 'Y' || endGame == 'y') {
-                location.reload();
-            } else {
-                continue;
+            while(true){
+                let endGame = prompt("Are you sure you want to exit? (Y/N)");
+                if (endGame == null || endGame == 'Y' || endGame == 'y') {
+                    location.reload();
+                } else if (endGame == 'n' || endGame == 'N'){
+                    break;
+                } else {
+                    console.log("Please write Y/y to end the game or N/n to continue playing")
+                }
             }
+            continue;
         }
         if (gameMoves.includes(playerMoveInput.trim().toLowerCase())) {
             return(playerMoveInput.trim().toLowerCase());
@@ -66,26 +71,39 @@ function gameRound(computerMovement,playerMovement) {
     }
 }
 
-function game() {
+function gameRounds() {
     let roundsToPlay = '';
-    computerGameScore = 0;
-    playerGameScore = 0;
-    console.log("WELCOME TO ROCK PAPER SCISSORS");
     while (true) {
         roundsToPlay = prompt("Enter the number of rounds you want to play (min 5): ");
         if (roundsToPlay === null) {
-            let endGame = prompt("Are you sure you want to exit? (Y/N)");
-            if (endGame == null || endGame == 'Y' || endGame == 'y') {
-                location.reload();
+            while(true){
+                let endGame = prompt("Are you sure you want to exit? (Y/N)");
+                if (endGame == null || endGame == 'Y' || endGame == 'y') {
+                    location.reload();
+                } else if (endGame == 'n' || endGame == 'N'){
+                    break;
+                } else {
+                    console.log("Please write Y/y to end the game or N/n to continue playing")
+                }
             }
+            continue;
         }
         if (parseInt(roundsToPlay)  >= 5) {
             break;
         } else {
             console.log("Please enter a number greater than 5!");
         }
-    }     
-    for (let i = 0; i < Math.floor(roundsToPlay); ++i) {
+    }
+    return roundsToPlay;     
+}
+
+function game() {
+    computerGameScore = 0;
+    playerGameScore = 0;
+    console.log("WELCOME TO ROCK PAPER SCISSORS");
+    console.log("REMEMBER THAT: \nROCK BEATS SCISSORS \nPAPER BEATS ROCK \nSCISSORS BEAT PAPER")
+    const game_rounds = gameRounds();
+    for (let i = 0; i < Math.floor(game_rounds); ++i) {
         const computer_play = computerPlay();
         const player_move = playerSelection();
         const game_round = gameRound(computer_play, player_move);
@@ -103,6 +121,14 @@ function game() {
         console.log(`FINAL SCORE = ${computerGameScore} - ${playerGameScore} COMPUTER WINS!`);
     } else  {
         console.log(`FINAL SCORE = ${computerGameScore} - ${playerGameScore} PLAYER WINS!`);
+    }
+    let playAgain = prompt("Would you like to play again? Y/N")
+    if (playAgain === null || playAgain == 'n' || playAgain =='N') {
+        return 0;
+    } else if ( playAgain == 'y' || playAgain =='Y') {
+        game();
+    } else {
+        console.log("Please enter Y/Y if you want to play again or N/n if not.")
     }
 }
 
