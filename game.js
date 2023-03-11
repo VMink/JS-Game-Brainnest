@@ -104,6 +104,7 @@ function game() {
     console.log("REMEMBER THAT: \nROCK BEATS SCISSORS \nPAPER BEATS ROCK \nSCISSORS BEAT PAPER")
     const game_rounds = gameRounds();
     for (let i = 0; i < Math.floor(game_rounds); ++i) {
+        console.log(`Round ${i}`);
         const computer_play = computerPlay();
         const player_move = playerSelection();
         const game_round = gameRound(computer_play, player_move);
