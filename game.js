@@ -8,13 +8,19 @@ let playerSelection = function() {
     let playerMoveInput = '';
     while (true) {
         playerMoveInput = prompt("Enter your move: ");
-        if (gameMoves.includes(playerMoveInput.toLowerCase().trim())) {
+        if (playerMoveInput === null) {
+            let endGame = prompt("Are you sure you want to exit? (Y/N)");
+            if (endGame == null || endGame == 'Y' || endGame == 'y') {
+                location.reload();
+            }
+        }
+        if (gameMoves.includes(playerMoveInput.trim().toLowerCase())) {
             break;
         } else {
             console.log("Error, please enter a valid move!");
         }
     }
-    return(playerMoveInput.toLowerCase());
+    return(playerMoveInput.trim().toLowerCase());
 }
 
 /*
@@ -28,24 +34,30 @@ function gameRound(computerMovement,playerMovement) {
             case "rock":
                 return 0;
             case "paper":
+                playerGameScore++;
                 return 1;
             case "scissors":
+                computerGameScore++;
                 return 2;
         }
     } else if (computerMovement == 'paper') {
         switch (playerMovement) {
             case "rock":
+                computerGameScore++;
                 return 2;
             case "paper":
                 return 0;
             case "scissors":
+                playerGameScore++;
                 return 1;
         }
     } else {
         switch (playerMovement) {
             case "rock":
+                playerGameScore++;
                 return 1;
             case "paper":
+                computerGameScore++;
                 return 2;
             case "scissors":
                 return 0;
@@ -60,6 +72,12 @@ function game() {
     console.log("WELCOME TO ROCK PAPER SCISSORS");
     while (true) {
         roundsToPlay = prompt("Enter the number of rounds you want to play (min 5): ");
+        if (roundsToPlay === null) {
+            let endGame = prompt("Are you sure you want to exit? (Y/N)");
+            if (endGame == null || endGame == 'Y' || endGame == 'y') {
+                location.reload();
+            }
+        }
         if (parseInt(roundsToPlay)  >= 5) {
             break;
         } else {
@@ -73,10 +91,8 @@ function game() {
         if (game_round == 0)  {
             console.log("Draw");
         } else if (game_round == 1) {
-            playerGameScore++;
             console.log(`Point to Player! ${player_move} beats ${computer_play}`);
         } else if (game_round == 2) {
-            computerGameScore++;
             console.log(`Point to Computer! ${computer_play} beats ${player_move}`);
         }
     }
