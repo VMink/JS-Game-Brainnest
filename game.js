@@ -12,6 +12,8 @@ let playerSelection = function() {
             let endGame = prompt("Are you sure you want to exit? (Y/N)");
             if (endGame == null || endGame == 'Y' || endGame == 'y') {
                 location.reload();
+            } else {
+                continue;
             }
         }
         if (gameMoves.includes(playerMoveInput.trim().toLowerCase())) {
@@ -103,3 +105,5 @@ function game() {
         console.log(`FINAL SCORE = ${computerGameScore} - ${playerGameScore} PLAYER WINS!`);
     }
 }
+
+game();
