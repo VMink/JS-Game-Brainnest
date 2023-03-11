@@ -8,6 +8,7 @@ let playerSelection = function() {
     let playerMoveInput = '';
     while (true) {
         playerMoveInput = prompt("Enter your move: ");
+        playerMoveInput.trim();
         if (gameMoves.includes(playerMoveInput.toLowerCase())) {
             break;
         } else {
