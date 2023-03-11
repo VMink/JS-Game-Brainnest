@@ -8,8 +8,7 @@ let playerSelection = function() {
     let playerMoveInput = '';
     while (true) {
         playerMoveInput = prompt("Enter your move: ");
-        playerMoveInput.trim();
-        if (gameMoves.includes(playerMoveInput.toLowerCase())) {
+        if (gameMoves.includes(playerMoveInput.toLowerCase().trim())) {
             break;
         } else {
             console.log("Error, please enter a valid move!");
