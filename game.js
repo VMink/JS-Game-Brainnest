@@ -15,12 +15,11 @@ let playerSelection = function() {
             }
         }
         if (gameMoves.includes(playerMoveInput.trim().toLowerCase())) {
-            break;
+            return(playerMoveInput.trim().toLowerCase());
         } else {
             console.log("Error, please enter a valid move!");
         }
     }
-    return(playerMoveInput.trim().toLowerCase());
 }
 
 /*
